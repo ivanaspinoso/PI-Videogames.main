@@ -1,0 +1,68 @@
+.landing {
+    background-image: url('https://i.pinimg.com/originals/75/2a/bc/752abcae3eea76aa7484f5d97f882cf0.gif');
+    padding:0%;
+    height: 100vh;
+    width: 100vh;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.title {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-family: 'VT323', monospace;
+    -moz-user-select: none ;
+    -ms-user-select: none ;
+    user-select: none ;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 48px; /* 32px default (2em) */
+}
+.eightbitBtn {
+    background: #ffff01;
+    display: inline-block;
+    text-align: center;
+    font-size: 24px;
+    padding: 15px 30px;
+    font-family:  'VT323', monospace;
+    text-decoration: none;
+    color: #000000;
+    box-shadow: inset -5px -5px 0px 0px #4c4c0a;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+.eightbitBtn:hover, 
+.eightbitBtn:focus {
+    background: #d8d80c;
+    cursor: pointer;
+    box-shadow: inset -6.5px -6.5px 0px 0px #4c4c0a;
+}
+.eightbitBtn:active {
+    background: #b3b308;
+    box-shadow: inset 4px 4px 0px 0px #4c4c0a;
+}
+.eightbitBtn:before, .eightbitBtn:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: content-box;
+}
+.eightbitBtn:before {
+    top: -6px;
+    left: 0;
+    border-top: 6px black solid;
+    border-bottom: 6px black solid;
+}
+.eightbitBtn:after {
+    left: -6px;
+    top: 0;
+    border-left: 6px black solid;
+    border-right: 6px black solid;
+}
