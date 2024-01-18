@@ -1,21 +1,18 @@
 const {Router}=require("express")
 const db = require("../db");
+const {createVideogame,
+    getVideogamebyID,
+    getAllGames,
+    getVideogamesByName,} = require("../controllers/videogameController/videogameController.js")
 
-const router = Router()
+const videoGameRouter = Router()
 
-router.get("/", async(req,res)=>{
+videoGameRouter.get("/", getAllGames)
 
-});
+videoGameRouter.get("/:id", getVideogamebyID)
 
-router.get("/idVideogame", async(req,res)=>{
+videoGameRouter.get("/search", getVideogamesByName)
 
+videoGameRouter.post("/",createVideogame)
 
-})
-
-router.get("/name", async(req,res)=>{
-
-})
-
-router.post("/", async(req,res)=>{
-    
-})
+module.exports=videoGameRouter;

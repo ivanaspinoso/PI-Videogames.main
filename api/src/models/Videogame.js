@@ -4,24 +4,24 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Videogame', {
-    nombre: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
-    descripcion:{
+    description:{
       type: DataTypes.STRING,
       allowNull: false,
     },
-    plataformas: {
+    platforms: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
-    imagen: {
+    image: {
       type:DataTypes.STRING,
       allowNull:false,
     },
-    fechaEstreno:{
+    released:{
       type: DataTypes.DATE,
       allowNull:false,
     },

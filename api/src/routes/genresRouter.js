@@ -1,10 +1,9 @@
 const {Router}= require("express")
 const db=require("../db")
+//importar controlador
+const genresRouter= Router()
+const {getGenres} =require("../controllers/genresControllers/genresController.js")
 
-const router= Router()
+genresRouter.get("/", getGenres)
 
-router.get("/", async(req,res)=>{
-
-})
-
-module.exports=router;
+module.exports= genresRouter;
