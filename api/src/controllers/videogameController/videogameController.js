@@ -44,7 +44,7 @@ const getVideogamebyID= async(req,res)=>{
 
         if(!response){
         // Si el resultado es nulo (no se encontró el juego en la base de datos)
-        return null;
+        return res.status(404).json({message:"Juego no encontrado"});
         }
 
         if(source==="api"){
@@ -62,12 +62,11 @@ const getVideogamebyID= async(req,res)=>{
         
     } catch (error) {
         console.error("Error al obtener el videojuego por ID", error)
-        throw new Error("Error al obtener el videojuego por ID: " + error.message)
+        res.status(500).json({message:"Error interno del servidor", error:error.message})
     }
 }
 
-//toma un array de elementos, realiza transformaciones especificas en las propiedades de cada elemento
-// y retorna un nuevo array con los elementos transformados => sirve para normalizar  la estructura de datos obtenida de una API u otra fuente de datos
+//cleanArray => toma un array de objetos de videojuegos y devuelve un nuevo array donde las plataformas se combinan y se obtienen los nombres únicos, y los ID de géneros se extraen para cada objeto.
 //es una funcion para limpiar y transformar un array de objetos de juegos
 const cleanArray = (array) => { 
     return array.map(elem=>{
