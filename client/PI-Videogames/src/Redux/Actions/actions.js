@@ -1,40 +1,53 @@
+import axios from 'axios';
 import { GET_VIDEOGAMES,SEARCH_BY_NAME,VIEW_VIDEOGAME_DETAIL,FILTER_BY_GENRE,FILTER_BY_NAME,SORT_BY_ALPHABET,SORT_BY_RATING } from "./actions-types";
-import axios from "axios";
+
+const apiUrl='http://localhost:3001'
 
 export function getVideogames(){
     return async function(dispatch) {
-        const response = await axios.get('http://localhost:3001/videogames')
+        try{
+        const response = await axios.get(`${apiUrl}/videogames`)
         dispatch({
             type: GET_VIDEOGAMES,
             payload: response.data
         })
+    }catch(error){
+        console.error('Error en la acción de obtener videojuegos:', error)
     }
 }
-
-export function searchByName(name){
-     return async function(dispatch){
-        const response = await axios.get(`http://localhost:3001/videogames?name=${name}`)
-        dispatch({
-            type: SEARCH_BY_NAME,
-            payload: response.data
-        })
-     }      
 }
+
+export function searchByName(input) {
+
+    return async function (dispatch) {
+       try {
+          const response = await axios.get(`${apiUrl}/videogames?name=${input}`);
+          console.log(response.data, 'response')
+          dispatch({ type: SEARCH_BY_NAME, payload: response.data });
+       } catch (error) {
+          console.error('Error en la acción de búsqueda:', error);
+       }
+    }
+ }
+ 
 
 export function videogameDetail(id){
     return async function(dispatch){
-        const response= await axios.get(`http://localhost:3001/videogames/${id}`)
+        try{
+        const response= await axios.get(`${apiUrl}/videogames/${id}`)
         dispatch({
             type: VIEW_VIDEOGAME_DETAIL,
             payload: response.data
         })
+    }catch(error){
+        console.error('Error en la acción de obtener detalle del videojuego:', error)
     }
-}
+}}
 
-export function filterByGenre(genre){
+export function filterByGenre(genres){
     return {
         type: FILTER_BY_GENRE,
-        payload: genre
+        payload: genres
     }
 }
 

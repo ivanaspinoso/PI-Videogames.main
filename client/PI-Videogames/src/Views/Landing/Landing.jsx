@@ -11,9 +11,6 @@ export const Landing = () => {
           Play!
         </button>
       </Link>
-
-
-
     </div>
   )
 }

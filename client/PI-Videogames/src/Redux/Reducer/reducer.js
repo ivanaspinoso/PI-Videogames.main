@@ -8,34 +8,58 @@ let initialState={
     filteredVideogames:[], //lista de videojuegos filtrados
 }
 
-//definir la funcion roorReducer
+//definir la funcion rootReducer
 
-function roorReducer(state=initialState,  { type, payload }){
-   switch (type){
+function rootReducer(state=initialState, action){
+   switch (action.type){
     case GET_VIDEOGAMES:
-        return{...state,videoGames:payload};
+        return{...state,videoGames:action.payload, filteredVideogames:action.payload};
 
     case SEARCH_BY_NAME:
-        return{...state,filteredVideogames:payload, videoGames:payload}  
+        return{...state,filteredVideogames:action.payload}  
         
     case VIEW_VIDEOGAME_DETAIL:
-        return{...state,videogameDetail:payload}
-        
+        return{...state,videogameDetail:action.payload}
+
     case FILTER_BY_GENRE:
-        return{...state, filteredVideogames:payload}
+        if (action.payload===undefined)
+        return{...state, filteredVideogames:action.payload}
+
+        const filterByGenre= state.videoGames.filter((fil)=>fil.genres.includes(action.payload))
+        return {
+            ...state,
+            filteredVideogames: filterByGenre, 
+        }
+    
         
     case FILTER_BY_NAME:
-        return{...state, filteredVideogames:payload}
-        
+        if(action.payload===undefined)
+        return{...state, filteredVideogames:state.videoGames}
+
+        const filteredByname = state.videoGames.filter((filtered)=>filtered.name.toLowerCase().includes(action.payload.toLowerCase()))
+        return {
+            ...state,
+            filteredVideogames:filteredByname,
+        }
+
+
     case SORT_BY_ALPHABET:
-        return{...state, videoGames:payload, filteredVideogames:payload}
+        const sortedVideogames = [...state.filteredVideogames].sort((a, b) =>
+        action.payload === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
+     );
+     return { ...state, filteredVideogames: sortedVideogames };
         
     case SORT_BY_RATING:
-        return{...state, videoGames:payload, filteredVideogames:payload}    
+        const sortedByRating = [...state.filteredVideogames].sort((a, b) =>
+        action.payload === 'asc' ? a.rating - b.rating : b.rating - a.rating
+     );
+     return { ...state, filteredVideogames: sortedByRating };  
 
+        default:
+            return state;
    }
 
-   
+
 }
 
-export default roorReducer;
+export default rootReducer;
