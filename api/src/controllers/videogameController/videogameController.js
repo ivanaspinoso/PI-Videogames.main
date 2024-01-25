@@ -1,6 +1,6 @@
 const axios=require("axios");
 require("dotenv").config();
-const {API_KEY,URL}=process.env
+const {API_KEY, URL}=process.env
 const {Videogame}=require("../../db")
 const {Op}=require("sequelize")
 
@@ -31,45 +31,66 @@ const createVideogame = async (req,res)=>{
 }
 
 //controlador para obtener videojuego por ID
-const getVideogamebyID= async(req,res)=>{
+const getVideogamebyID = async (req, res) => {
+    const {id} = req.params 
 
-    const {id}=req.params;
-    const source = isNaN(id) ? "db" : "api"
-    try {
+    //verifica si el ID tiene un guion
+    if(id.includes('-')){
+        //busca el videojuego en la base de datos con el ID
+        let videogameDb = await Videogame.findOne({
+            where:{
+                id:id,
+            },
+            include: Genre //incluye la asociacion con el modelo Genre
+        })
 
-        // obtengo la respuesta segun la fuente (API o base de datos)
-        const response = source === "api" 
-        ? await axios.get(`${URL}/games/${id}?key=${API_KEY}`)
-        : await Videogame.findByPk(id)
+        // contiene el objeto a cadena JSON y luego lo vuelve a parsear para asegurar que los datos sean objetos
+        videogameDb=JSON.stringify(videogameDb)
+        videogameDb= JSON.parse(videogameDb)
 
-        if(!response){
-        // Si el resultado es nulo (no se encontró el juego en la base de datos)
-        return res.status(404).json({message:"Juego no encontrado"});
-        }
+        //mapea los nombres de los generos para que sea mas legible
+        videogameDb.genres = videogameDb.genres.map(g=>g.name)
 
-        if(source==="api"){
-            const {id: apiId, name, description, released, platforms, image, rating , genres} = response.data
-            const platformName = platforms.map(data => data.platform.name)
-            const genreName = genres.map(data=>data.name)
-
-            return {
-                id: apiId, name, description, released, platformName, image, rating, genreName
-            } 
-          }else {
-            // si la fuente es la base de datos, retorna la respuesta directamente
-                return response
-            }
-        
-    } catch (error) {
-        console.error("Error al obtener el videojuego por ID", error)
-        res.status(500).json({message:"Error interno del servidor", error:error.message})
+        //retorna la informacion del videojuego desde la base de datos
+        res.json(videogameDb)
     }
+
+    //si el iD no contiene "-", realiza la solicitud a la API externa
+    try {
+        //realiza una solicitud a la API externa para obtener la info
+        const response = await axios.get(`${URL}/games/${id}?key=${API_KEY}`)
+
+        //extrae los datos relevante de la respuesta de la API
+        let {name, image, genres, description, released: releaseDate, rating, platforms}= response.data
+
+        //mapea los nombres de los generos para que sea mas legible
+        genres = genres.map(g=>g.name)
+        //mapea los nombres de las plataformas
+        platforms=platforms.map(p=>p.platform.name)
+        //retorna la informacion del videojuego desde la API externa
+        return res.json({
+            name,
+            image,
+            genres,
+            description,
+            releaseDate,
+            rating,
+            platforms
+        })
+    } catch(err) {
+        console.error(err)
+        return console.log(err)
+    }
+
 }
+//este controlador busca info del videojuego segun el id proporcionado, primero en la base de datos local y, si no se encuentra, realiza una solicitud a la API externa.
+ 
+   
 
 //cleanArray => toma un array de objetos de videojuegos y devuelve un nuevo array donde las plataformas se combinan y se obtienen los nombres únicos, y los ID de géneros se extraen para cada objeto.
 //es una funcion para limpiar y transformar un array de objetos de juegos
 const cleanArray = (array) => { 
-    return array.map(elem=>{
+    return array?.map(elem=>{
         //para cada elemento(elem) del array, realiza las siguientes operaciones:
 
         //combina las plataformas y las plataformas parentales del elem,luego aplana el array y extrae los nombres unicos 
@@ -123,7 +144,7 @@ try{
         //busco videojuegos en la base de datos que coincidan con el nombre
         const databaseVideogames= await Videogame.findAll({
             where: {
-            nombre:{
+            name:{
                 [Op.iLike]: `%${name}%` //busca case insensitive(sin distinguir mayuscula de minusculas)
             }
         },
@@ -131,12 +152,13 @@ try{
         });
        
         //obtengo videojuegos en la API que coincidan con el nombre usando axios y los procesa
-        const apiVideogamesRaw= await axios.get(`${URL}/games?search=${name}&key=${API_KEY}&pageSize=15`).data.results;
-        const apiVideoGame= cleanArray(apiVideogamesRaw) //se aplica la funcion cleanArray 
-
+        const apiVideogamesRaw= await axios.get(`${URL}/games?search=${name}&key=${API_KEY}&pageSize=15`);
+        // const apiVideoGame= cleanArray(apiVideogamesRaw) //se aplica la funcion cleanArray 
+        const data = apiVideogamesRaw?.data?.results
+        console.log(data)
         //filtra los videojuegos de la API que coincidan con el nombre
-        const filteredApi=apiVideoGame.filter((game)=>game.name.toLowerCase().includes(name.toLowerCase()))
-
+        const filteredApi=data?.filter((game)=>game.name.toLowerCase().includes(name.toLowerCase()))
+        console.log(filteredApi)
         //combino los videojuegos de la base de datos y de la API
         const result = [...databaseVideogames, ...filteredApi]; //Se combinan los videojuegos obtenidos de la base de datos con los de la API.
 

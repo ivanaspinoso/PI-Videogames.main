@@ -7,11 +7,11 @@ const {createVideogame,
 
 const videoGameRouter = Router()
 
-videoGameRouter.get("/", getAllGames)
+videoGameRouter.get("/", getVideogamesByName);
 
 videoGameRouter.get("/:id", getVideogamebyID)
 
-videoGameRouter.get("/search", getVideogamesByName)
+videoGameRouter.get("/", getAllGames)
 
 videoGameRouter.post("/",createVideogame)
 
