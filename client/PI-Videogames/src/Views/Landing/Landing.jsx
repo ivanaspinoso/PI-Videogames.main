@@ -6,7 +6,7 @@ export const Landing = () => {
   return (
     <div className={s.landing}>
       <h1 className={s.title}>Videogames</h1>
-      <Link to="/">
+      <Link to="/home">
         <button className={s.eightbitBtn}>
           Play!
         </button>

@@ -9,12 +9,11 @@ export const FilterByGenre = () => {
     dispatch(filterByGenre(genres))
   }
 
-
   return (
     <div>
       <label htmlFor="filterByGenre">Filter by genre</label>
-      <select id="filterByGenre" onChange={(e)=> handleFilter(e.target.value)}>
-      <option value=''>Default</option>
+      <select id="filterByGenre" onChange={(e)=> handleFilter(e.target.value)}>     
+                    <option value=''>Default</option>
                     <option value="Action">Action</option>
                     <option value="Indie">Indie</option>
                     <option value="Adventure">Adventure</option>

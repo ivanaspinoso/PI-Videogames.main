@@ -1,0 +1,27 @@
+.span {
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    color: #fff;
+}
+.container {
+    display: flex;
+    background-color: rgb(29, 32, 26);
+    padding: 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px; /* Ajusta según sea necesario */
+    z-index: 9999;
+    position: fixed;
+    margin-top: 75px;
+    width: max-content;
+    top: auto;
+    right: 30%;
+    
+  }  
+
+.select {
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    color: #fff;
+}

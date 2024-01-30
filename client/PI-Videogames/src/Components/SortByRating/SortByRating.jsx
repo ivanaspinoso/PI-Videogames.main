@@ -5,9 +5,13 @@ import { sortByRating } from '../../Redux/Actions/actions'
 export const SortByRating = () => {
     const dispatch=useDispatch()
 
-    const handleSort=(payload)=>{
-        dispatch(sortByRating(payload))
-    }
+    const handleSort = (payload) => {
+        // Mapea 'high' y 'less' a 'asc' y 'desc' respectivamente
+        const sortOrder = payload === 'less' ? 'desc' : 'asc';
+        dispatch(sortByRating(sortOrder));
+      };
+      
+      
   return (
     <div>
         <label htmlFor="sortByRating">Sort by rating</label>

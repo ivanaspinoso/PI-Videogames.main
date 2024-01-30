@@ -1,0 +1,83 @@
+/* Create.css */
+
+.create-background {
+    background-image: url('https://i.pinimg.com/originals/aa/25/a1/aa25a1bd28c0cb0fcc844afdce6bf27d.gif'); /* Reemplaza 'tu-url-de-imagen' con la URL de tu imagen de fondo */
+    padding-left: 0;
+    padding-right: 0;
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: absolute;
+    text-align: center;
+    font-weight: 600;
+    opacity: 0.6;
+  }
+  
+  .create-genres-wrapper {
+    display: flex;
+    justify-content: space-between;  
+  }
+
+  .create-container {
+    height: 578px;
+    text-align: center;
+    padding-top: 5px;
+  }
+  
+  .create-form {
+    background: rgba(255, 255, 255, 0.4);
+    margin: auto;
+    width: 800px;
+    height: 590px;
+    border-radius: 10%;
+    padding: 20px;
+  }
+  
+  .create-title {
+    font-size: 24px;
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  .create-textarea {
+    max-height: 100px;
+    max-width: 200px;
+    min-height: 50px;
+  }
+  
+  .create-genres-container {
+    font-size: 18px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-weight: 600;
+  }
+  
+  .create-label-title {
+    font-size: 20px;
+  }
+  
+  .create-div-genre {
+    display: inline-block;
+  }
+  
+  .create-platforms-container {
+    font-size: 18px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-weight: 600;
+  }
+  
+  .create-btn {
+    font-family: 'Press Start 2P';
+    font-weight: bold;
+    padding: 8px;
+  }
+  
+  .create-error {
+    border: 2px solid red;
+  }
+  

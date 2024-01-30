@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_VIDEOGAMES,SEARCH_BY_NAME,VIEW_VIDEOGAME_DETAIL,FILTER_BY_GENRE,FILTER_BY_NAME,SORT_BY_ALPHABET,SORT_BY_RATING } from "./actions-types";
+import { GET_VIDEOGAMES,SEARCH_BY_NAME,VIEW_VIDEOGAME_DETAIL,FILTER_BY_GENRE,FILTER_BY_NAME,SORT_BY_ALPHABET,SORT_BY_RATING,CREATE_VIDEOGAME,GET_GENRES } from "./actions-types";
 
 const apiUrl='http://localhost:3001'
 
@@ -18,11 +18,10 @@ export function getVideogames(){
 }
 
 export function searchByName(input) {
-
     return async function (dispatch) {
        try {
-          const response = await axios.get(`${apiUrl}/videogames?name=${input}`);
-          console.log(response.data, 'response')
+        
+          const response = await axios.get(`${apiUrl}/videogames/search?name=${input}`);
           dispatch({ type: SEARCH_BY_NAME, payload: response.data });
        } catch (error) {
           console.error('Error en la acción de búsqueda:', error);
@@ -72,3 +71,31 @@ export function sortByRating(payload){
     }
 }
 
+export function createVideoGame(payload) {
+    return async function (dispatch) {
+      try {
+        const response = await axios.post(`${apiUrl}/videogames`, payload);
+  
+        dispatch({
+          type: CREATE_VIDEOGAME,
+          payload: response.data,
+        });
+      } catch (error) {
+        console.error('Error en la acción de crear videojuego:', error);
+      }
+    };
+  }
+
+export function getGenres(){
+    return async function (dispatch) {
+        try {
+          const response = await axios.get(`${apiUrl}/genres`);
+          dispatch({
+            type: GET_GENRES,
+            payload: response.data
+          });
+        } catch (error) {
+          console.error('Error en la acción de obtener géneros:', error);
+        }
+      };
+    }

@@ -1,0 +1,58 @@
+/* Navbar.module.css */
+
+.form {
+    margin: auto;
+}
+
+.input {
+    font-family: 'VT323', monospace;
+    width: 15rem;
+    height: 22px;
+    background:#161616;
+    color:white;
+    font-size: 1.5rem;
+}
+
+.search {
+    font-family: 'VT323', monospace;
+    height: 46px;
+    background: #696565;
+    color:#000000;
+    
+}
+.search:hover {
+    color:#ffffff;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdownButton {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .dropdownContent div {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+  }
+  
+  .dropdownContent div:hover {
+    background-color: #f1f1f1;
+  }

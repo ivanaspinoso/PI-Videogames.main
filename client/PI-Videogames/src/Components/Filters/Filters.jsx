@@ -1,10 +1,10 @@
 import React from 'react'
 import { FilterByGenre } from '../FilterByGenre/FilterByGenre'
-import { FilterByName } from '../FilterByName/FilterByName'
 import { SortByAlphabet } from '../SortByAlphabet/SortByAlphabet'
 import { SortByRating } from '../SortByRating/SortByRating'
 import { useDispatch } from 'react-redux'
-import { filterByGenre, filterByName, sortByAlphabet, sortByRating } from '../../Redux/Actions/actions'
+import { filterByGenre, sortByAlphabet, sortByRating } from '../../Redux/Actions/actions'
+import s from "./Filters.module.css"
 
 export const Filters = ({genres}) => {
     const dispatch=useDispatch()
@@ -21,13 +21,13 @@ export const Filters = ({genres}) => {
         dispatch(sortByRating(e.target.value))
     }
 
-    const handleFilterName=(e)=>{
-        dispatch(filterByName(e.target.value))
-    }
+    // const handleFilterName=(e)=>{
+    //     dispatch(filterByName(e.target.value))
+    // }
   return (
-    <div>
+    <div className={s.container}>
         <FilterByGenre genres={genres} onChange={handleFilter}/>
-        <FilterByName onChange={handleFilterName}/>
+        {/* <FilterByName onChange={handleFilterName}/> */}
         <SortByAlphabet onChange={handleAlphabet}/>
         <SortByRating onChange={handleRating}/>
     </div>

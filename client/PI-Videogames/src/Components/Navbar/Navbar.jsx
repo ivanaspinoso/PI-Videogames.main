@@ -1,7 +1,8 @@
-import {Link, NavLink} from "react-router-dom"
+import { NavLink} from "react-router-dom"
 import React, {useState} from "react"
 import { searchByName } from "../../Redux/Actions/actions"
 import { useDispatch } from "react-redux"
+import s from "./Navbar.module.css"
 
 export const Navbar = () => {
   
@@ -16,65 +17,71 @@ export const Navbar = () => {
 
     const handleSearch = (e)=>{
         e.preventDefault()
-        console.log(input)
         dispatch(searchByName(input))
-    }
+    }   
 
     const [click,setClick]=useState(false)
     const handleClick =()=>setClick(!click)
     return(
         <>
-        <nav >
-            <div>
-                <NavLink exact to="/" >
+        <nav className="navbar" >
+            <div className="nav-container">
+                <NavLink  to="/"  className="nav-logo">
                     Videogames App
             
                 </NavLink>
-                <form  >
-                    <input onChange={handleInput}  type="text" placeholder='Search games'  />
-                    <button onClick={handleSearch}>Search</button>
+                <form className={s.form} >
+                    <input onChange={handleInput}  type="text" placeholder='Search games' className={s.input}
+                    />
+                    <button onClick={handleSearch} className={s.search}>Search</button>
                 </form>
-                <ul >
-                    <li>
+                <ul className={click ? "nav-menu active" : "nav-menu"}>
+                    <li className="nav-item">
                         <NavLink
-                            exact to="/home"           
+                             to="/home"   
+                             activeclassname="active"
+                                className="nav-links"       
                             onClick={handleClick}
                         >
                             Home </NavLink>
                     </li>
-                    <li >
+                    <li className="nav-item">
                         <NavLink
-                            exact
-                            to="/create"
                             
+                            to="/create"
+                            activeclassname="active"
+                                className="nav-links"
                             onClick={handleClick}
                         >
                             Create
                         </NavLink>
                     </li>
-                    <li >
+                    <li className="nav-item" >
                         <NavLink
-                            exact
+                            
                             to="/Favorites"
-                        
+                            activeclassname="active"
+                                className="nav-links"
                             onClick={handleClick}
                         >
                             Favorites
                         </NavLink>
                     </li>
-                    <li >
+                    <li className="nav-item">
                         <NavLink
-                            exact
+                            
                             to="/about"
-                           
+                            activeclassname="active"
+                                className="nav-links"
+
                             onClick={handleClick}
                         >
                             About
                         </NavLink>
                     </li>
                 </ul>
-                <div onClick={handleClick}>
-                   
+                <div className="nav-icon"  onClick={handleClick}>
+                <i className={click ? "fas fa-times" : "fas fa-bars"}></i>
                 </div>
             </div>
         </nav>

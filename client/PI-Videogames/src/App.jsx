@@ -1,35 +1,37 @@
-import {BrowserRouter, Routes, Route, Form } from "react-router-dom"
-import './App.css'
-import { Home } from "./Views/Home/Home.jsx"
-import { Create } from "./Views/Form/Create.jsx"
-import { Landing } from "./Views/Landing/Landing.jsx"
-import {Detail} from "./Views/Detail/Detail.jsx"
-import { useDispatch } from "react-redux"
-import { useEffect } from "react"
-import { getVideogames } from "./Redux/Actions/actions"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import './App.css';
+import { Home } from "./Views/Home/Home.jsx";
+import { Create } from "./Views/CreateGame/Create";
+import { Landing } from "./Views/Landing/Landing.jsx";
+import { Detail } from "./Views/Detail/Detail.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getVideogames } from "./Redux/Actions/actions";
+import { Navbar } from "./Components/Navbar/Navbar";
 
 function App() {
-const dispatch=useDispatch();
+  const dispatch = useDispatch();
+  const videogames = useSelector((state) => state.videoGames);
 
-useEffect(()=>{
-  dispatch(getVideogames)
-},[dispatch])
+  useEffect(() => {
+    dispatch(getVideogames());
+  }, [dispatch]);
+
   return (
-    
+    <Router>
       <div>
-       <BrowserRouter>
-       <Routes>
-        {/* <Route path="/navbar/:input" element={< />}/> */}
-        <Route path="/" element={<Landing/>}/>
-        <Route path="/home" element={<Home/>}/>
-        <Route path="/create" element={<Create/>}/>
-        <Route path="/detail/:id" element={<Detail/>}/>
-       </Routes>
-       </BrowserRouter>
+      {/* <Navbar /> */}
+        <Routes>
+
+          <Route path="/" element={<Landing />} />
+          <Route path="/home" element={<Home videogames={videogames} />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/detail/:id" element={<Detail videogames={videogames} />} />
+        </Routes>
       </div>
-      
-   
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
+

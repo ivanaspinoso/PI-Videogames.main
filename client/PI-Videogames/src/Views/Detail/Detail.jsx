@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { videogameDetail } from '../../Redux/Actions/actions'
+import "./Detail.css"
 import { Navbar } from '../../Components/Navbar/Navbar'
 
 export const Detail = () => {
@@ -18,10 +19,12 @@ useEffect(()=>{ //: Hook que se ejecuta después de que el componente es montado
 
 
   return (
-    <div>
+    <div className="detail-container">
+       <Navbar />
        <h1>Videojuegos</h1>
-       <div> {gameDetail ?( <div>
+       <div className="detail-info"> {gameDetail ?( <div>
      <h3>{gameDetail.name}</h3>
+     <img src={gameDetail.background_image} alt={gameDetail.name} className="detail-image" />
      <h2>About this game:</h2>
      <p> {gameDetail.description.replace(/(<([^>]+)>)/ig, '')}</p>
      <p>{gameDetail.genres ? gameDetail.genres.join(', ') : 'No genres available'}</p>
@@ -29,7 +32,7 @@ useEffect(()=>{ //: Hook que se ejecuta después de que el componente es montado
      <p>{gameDetail.released}</p>
      <p>{gameDetail.rating}</p>
      </div>
-     ) : ( <h1>Cargando</h1>
+     ) : ( <h1 className="loading">Cargando</h1>
      )}
      </div>
     </div>

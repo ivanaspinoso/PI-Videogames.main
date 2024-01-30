@@ -1,0 +1,33 @@
+/* Home.module.css */
+
+.background {
+    background-image: url('https://i.pinimg.com/originals/aa/25/a1/aa25a1bd28c0cb0fcc844afdce6bf27d.gif');
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    position:sticky;
+  background-position: center;
+    background-size:cover;
+    background-repeat: repeat;
+    position:absolute;
+    text-align:center;
+    opacity:0.6 ;
+}
+
+.games {
+    display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 columnas */
+  grid-template-rows: repeat(3, auto);
+  gap: 16px; /* Espacio entre las celdas */
+  margin-top: 40px; /* Ajusta según sea necesario */
+  margin-bottom: 20px;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+}
+
+.pagination {
+    margin-top: 0.4px; /* Ajusta la distancia entre los juegos y la paginación según tus necesidades */
+    display:flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+  }

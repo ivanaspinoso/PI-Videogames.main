@@ -1,65 +1,89 @@
 .landing {
-    background-image: url('https://i.pinimg.com/originals/75/2a/bc/752abcae3eea76aa7484f5d97f882cf0.gif');
-    padding:0%;
-    height: 100vh;
-    width: 100vh;
-    background-size: 100% 100%;
-    background-position: center;
+    background-image: url('https://i.pinimg.com/originals/aa/25/a1/aa25a1bd28c0cb0fcc844afdce6bf27d.gif');
+    padding-left: 0;
+    padding-right: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
-    position: relative;
+    position: absolute;
+    text-align: center;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    box-sizing: border-box;
     align-items: center;
+    opacity: 0.6;
 }
 
 .title {
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-shadow: -1px 5px 0px rgba(0, 0, 0, 0.5) 5px 5px 0 #000;
     font-family: 'VT323', monospace;
-    -moz-user-select: none ;
-    -ms-user-select: none ;
-    user-select: none ;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     color: #ffffff;
     text-align: center;
     margin-bottom: 20px;
-    font-size: 48px; /* 32px default (2em) */
+    font-size: 80px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: -5%;
+    opacity: 1; /* Asegura que el título no tenga opacidad */
 }
+
 .eightbitBtn {
     background: #ffff01;
     display: inline-block;
+    position: relative;
     text-align: center;
     font-size: 24px;
     padding: 15px 30px;
-    font-family:  'VT323', monospace;
+    font-family: 'VT323', monospace;
     text-decoration: none;
     color: #000000;
     box-shadow: inset -5px -5px 0px 0px #4c4c0a;
     transition: background 0.3s, box-shadow 0.3s;
+    margin-top: 20px;
+    width: 100px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1; /* Asegura que el botón no tenga opacidad */
 }
-.eightbitBtn:hover, 
+
+.eightbitBtn:hover,
 .eightbitBtn:focus {
     background: #d8d80c;
     cursor: pointer;
     box-shadow: inset -6.5px -6.5px 0px 0px #4c4c0a;
 }
+
 .eightbitBtn:active {
     background: #b3b308;
     box-shadow: inset 4px 4px 0px 0px #4c4c0a;
 }
-.eightbitBtn:before, .eightbitBtn:after {
+
+.eightbitBtn:before,
+.eightbitBtn:after {
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
     box-sizing: content-box;
 }
+
 .eightbitBtn:before {
     top: -6px;
     left: 0;
     border-top: 6px black solid;
     border-bottom: 6px black solid;
 }
+
 .eightbitBtn:after {
     left: -6px;
     top: 0;

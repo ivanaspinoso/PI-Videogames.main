@@ -1,0 +1,71 @@
+.detail-container {
+    background-image: url('https://i.pinimg.com/originals/aa/25/a1/aa25a1bd28c0cb0fcc844afdce6bf27d.gif');
+    padding-left: 0;
+    padding-right: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: absolute;
+    text-align: center;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.6;
+  }
+
+  .detail-image {
+    width: 150px; /* La imagen se ajustará al ancho máximo del contenedor padre */
+    height: 85px; /* La altura se ajustará automáticamente para mantener la proporción */
+  }
+  
+  .detail-container .title {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-family: 'VT323', monospace;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 48px;
+  }
+  
+  .detail-container .detail-info {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+   
+  }
+  
+  .detail-container .detail-info h3 {
+    font-size: 24px;
+    color: #040404;
+    margin-bottom: 10px;
+  }
+  
+  .detail-container .detail-info h2 {
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 10px;
+  }
+  
+  .detail-container .detail-info p {
+    font-size: 16px;
+    color: #050505;
+    margin-bottom: 10px;
+  }
+  
+  .detail-container .loading {
+    font-family: 'VT323', monospace;
+    font-size: 24px;
+    color: #040404;
+    text-align: center;
+    margin-top: 20px;
+  }
