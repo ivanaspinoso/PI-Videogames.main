@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     image: {
-      type:DataTypes.STRING,
+      type:DataTypes.TEXT,
       allowNull:false,
     },
     released:{
@@ -29,5 +29,10 @@ module.exports = (sequelize) => {
       type: DataTypes.DECIMAL,
       allowNull: true,
     },
+    genres: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false
+    }
   });
 };
+//rating, released, image, platforms,description,name

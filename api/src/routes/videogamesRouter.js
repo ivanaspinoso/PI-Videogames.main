@@ -7,7 +7,7 @@ const {createVideogame,
 
 const videoGameRouter = Router()
 
-videoGameRouter.get("/", getVideogamesByName);
+videoGameRouter.get("/search", getVideogamesByName)
 
 videoGameRouter.get("/:id", getVideogamebyID)
 
