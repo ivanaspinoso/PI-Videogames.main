@@ -12,6 +12,8 @@ export const Create = () => {
   const genres1 = genres?.slice(0, 10) || [];
   const genres2 = genres?.slice(10, 20) || [];
 
+  const allGenres= [...genres1, ...genres2];
+
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -99,19 +101,19 @@ useEffect(() => {
 
     // Validaciones
     if (!formData.name) {
-      alert("Ups! falta el nombre.");
+      alert("¡Ups! falta el nombre");
       return;
     }
 
     if (!formData.description) {
-      alert("Ups! falta la descripción.");
+      alert("¡Ups! falta la descripción");
       return;
     }
 
 
 
     if (!formData.released) {
-      alert("Ups! falta la fecha de lanzamiento.");
+      alert("¡Ups! falta la fecha de lanzamiento");
       return;
     }
 
@@ -119,17 +121,17 @@ useEffect(() => {
     //primero convertimos formData.rating a un número utilizando parseFloat y luego verificamos si es un número válido y si está en el rango correcto. Esto debería solucionar el problema que estás experimentando. Asegúrate de realizar esta corrección y prueba nuevamente.
     const rating = parseFloat(formData.rating);
     if (isNaN(rating) || rating < 0 || rating > 5) {
-      alert("Ups! el rating debe ser un número entre 0 y 5.");
+      alert("¡Ups! el rating debe ser un número entre 0 y 5");
       return;
     } 
 
     if(formData.platforms.length===0){
-      alert("Ups! falta que elijas las plataformas")
+      alert("¡Ups! falta que elijas las plataformas")
       return;
     }
 
     if(formData.genres.length===0){
-      alert("Ups! falta que elijas los géneros")
+      alert("¡Ups! falta que elijas los géneros")
       return;
     }
 
@@ -148,7 +150,8 @@ useEffect(() => {
   return (
     <div className="create-background">
         <Navbar />
-      <h2 className="create-title">Crea un nuevo Videojuego!</h2>
+        <div className='create-container'>
+      <h2 className="create-title">¡Crea un nuevo Videojuego!</h2>
       <form className="create-form" onSubmit={handleSubmit}>
         <label htmlFor="name" className="create-label-title">Name:</label>
         <input name="name" type="text" id="name" className="create-input" onChange={handleChange} placeholder="Name" />
@@ -163,35 +166,20 @@ useEffect(() => {
         <input type="date" name="released" className="create-input" onChange={handleChange} placeholder="Released" />
 
         <label className="create-label-title">Genres:</label>
-        <div className="create-genres-container">
-          {genres1.map((gen) => (
-            <div className="create-div-genre" key={gen.name}>
-              <input
-                type="checkbox"
-                name="genres"
-                value={gen.name}
-                onChange={handleChange}
-                checked={formData.genres.includes(gen.name)}
-              />
-              <label>{gen.name}</label>
-            </div>
-          ))}
-        </div>
-
-        <div>
-          {genres2.map((gen) => (
-            <div className="create-div-genre" key={gen.name}>
-              <input
-                type="checkbox"
-                name="genres"
-                value={gen.name} 
-                onChange={handleChange}
-                checked={formData.genres.includes(gen.name)}
-              />
-              <label>{gen.name}</label>
-            </div>
-          ))}
-        </div>
+<div className="create-genres-container">
+  {allGenres.map((gen) => (
+    <div className="create-div-genre" key={gen.name}>
+      <input
+        type="checkbox"
+        name="genres"
+        value={gen.name}
+        onChange={handleChange}
+        checked={formData.genres.includes(gen.name)}
+      />
+      <label>{gen.name}</label>
+    </div>
+  ))}
+</div>
 
         <label htmlFor="platforms" className="create-label-title">Platforms:</label>
         <div className="create-platforms-container">
@@ -211,11 +199,10 @@ useEffect(() => {
           onChange={handleImageChange}
         />
 
-
         <button type="submit" className="create-btn">Crear Videojuego</button>
       </form>
 
-            
+      </div>
     </div>
   );
 };

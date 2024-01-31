@@ -12,6 +12,7 @@
     position:absolute;
     text-align:center;
     opacity:0.6 ;
+    background-attachment: fixed;
 }
 
 .games {
@@ -23,7 +24,6 @@
   margin-bottom: 20px;
   justify-content: center;
   position: sticky;
-  top: 0;
 }
 
 .pagination {

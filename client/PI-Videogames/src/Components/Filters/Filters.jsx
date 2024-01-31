@@ -26,10 +26,10 @@ export const Filters = ({genres}) => {
     // }
   return (
     <div className={s.container}>
-        <FilterByGenre genres={genres} onChange={handleFilter}/>
+        <FilterByGenre genres={genres} onChange={handleFilter}  className={s.filter}/>
         {/* <FilterByName onChange={handleFilterName}/> */}
-        <SortByAlphabet onChange={handleAlphabet}/>
-        <SortByRating onChange={handleRating}/>
+        <SortByAlphabet onChange={handleAlphabet}  className={s.filter}/>
+        <SortByRating onChange={handleRating}  className={s.filter}/>
     </div>
   )
 }

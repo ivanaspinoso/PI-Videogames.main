@@ -13,71 +13,80 @@
     text-align: center;
     font-weight: 600;
     opacity: 0.6;
+    
   }
   
-  .create-genres-wrapper {
-    display: flex;
-    justify-content: space-between;  
-  }
+.create-title{
+  font-size: 20px;
+  margin-bottom: 24px;
+}
 
-  .create-container {
-    height: 578px;
-    text-align: center;
-    padding-top: 5px;
-  }
+.create-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  padding-top: 5px;
+  margin-top: 50px;
+  padding-bottom: 60px;
+}
+
+.create-form {
+  background: rgb(29, 32, 26);
+  width: 800px;
+  max-width: 90%;
+  border-radius: 10%;
+  padding: 20px;
   
-  .create-form {
-    background: rgba(255, 255, 255, 0.4);
-    margin: auto;
-    width: 800px;
-    height: 590px;
-    border-radius: 10%;
-    padding: 20px;
-  }
+}
+
+.create-title {
+  font-size: 24px;
+ padding-top: 40px;
+}
+
+.create-label-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  margin-top: 30px;
   
-  .create-title {
-    font-size: 24px;
-    margin: 0px;
-    padding: 0px;
-  }
+}
+
+.create-input,
+.create-textarea,
+.create-select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.create-genres-container,
+.create-platforms-container {
+  font-size: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.create-div-genre {
+  display: flex;
+  align-items: center;
+}
+
+.create-btn {
+  font-family: 'VT323', monospace;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #fff;
+  color: #282c34;
+  border: 2px solid #282c34;
+  cursor: pointer;
+  border-radius: 4px;
   
-  .create-textarea {
-    max-height: 100px;
-    max-width: 200px;
-    min-height: 50px;
-  }
   
-  .create-genres-container {
-    font-size: 18px;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-weight: 600;
-  }
-  
-  .create-label-title {
-    font-size: 20px;
-  }
-  
-  .create-div-genre {
-    display: inline-block;
-  }
-  
-  .create-platforms-container {
-    font-size: 18px;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-weight: 600;
-  }
-  
-  .create-btn {
-    font-family: 'Press Start 2P';
-    font-weight: bold;
-    padding: 8px;
-  }
-  
-  .create-error {
-    border: 2px solid red;
-  }
-  
+}

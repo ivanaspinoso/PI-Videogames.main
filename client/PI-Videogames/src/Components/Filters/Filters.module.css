@@ -12,12 +12,12 @@
     justify-content: center;
     margin-bottom: 40px; /* Ajusta según sea necesario */
     z-index: 9999;
-    position: fixed;
+    position: absolute;
     margin-top: 75px;
     width: max-content;
     top: auto;
     right: 30%;
-    
+    border-radius: 10px;
   }  
 
 .select {
@@ -25,3 +25,8 @@
     font-size: 20px;
     color: #fff;
 }
+
+.filter {
+    margin-right: 20px; /* Puedes ajustar este valor según sea necesario */
+  }
+  
