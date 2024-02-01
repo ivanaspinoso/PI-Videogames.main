@@ -8,10 +8,9 @@ export const Create = () => {
   const dispatch = useDispatch();
   const newVideogame = useSelector((state) => state.newVideogame);
   const genres = useSelector((state) => state.genres || [] );
-  const genrestest = useSelector((state) => state );
   const genres1 = genres?.slice(0, 10) || [];
   const genres2 = genres?.slice(10, 20) || [];
-
+  const [showAlert, setShowAlert] = useState(false); 
   const allGenres= [...genres1, ...genres2];
 
   const [formData, setFormData] = useState({
@@ -22,11 +21,14 @@ export const Create = () => {
     rating: '',
     genres: [],
   });
-console.log(newVideogame, 'newvideogame')
-useEffect(() => {
-  newVideogame &&  alert("¡Felicidades, tu videojuego fue creado con éxito!");
 
-}, [newVideogame])
+  useEffect(() => {
+    if (newVideogame !== null) {
+      showAlert && alert("¡Felicidades, tu videojuego fue creado con éxito!");
+      setShowAlert(false);
+    }
+  }, [newVideogame, showAlert]);
+
   useEffect(() => {
     dispatch(getGenres());
   }, [dispatch]);
@@ -46,97 +48,44 @@ useEffect(() => {
     }
   };
 
-  const handleImageChange = async (e) => {
-    const imageFile = e.target.files[0];
-
-    // Verificar si se seleccionó un archivo
-    if (!imageFile) {
-        console.error('No se ha seleccionado ningún archivo.');
-        return;
-    }
-
-    // Crear una promesa para manejar la lógica asíncrona
-    const readImageFile = () => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-
-            // Definir el manejo de errores
-            reader.onerror = (error) => {
-                reject(error);
-            };
-
-            // Definir el manejo al completar la lectura
-            reader.onloadend = () => {
-                if (reader.result) {
-                    resolve(reader.result);
-                } else {
-                    reject(new Error('El resultado de la lectura es nulo.'));
-                }
-            };
-
-            // Leemos el contenido del archivo como una URL de datos
-            reader.readAsDataURL(imageFile);
-        });
-    };
-
-    try {
-        const imageDataURL = await readImageFile();
-        setFormData({
-            ...formData,
-            image: imageDataURL,
-        });
-        console.log(imageDataURL, 'imageDataURL');
-        console.log(formData);
-    } catch (error) {
-        console.error('Error al leer el archivo:', error);
-    }
-};
-
-  
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validaciones
     if (!formData.name) {
-      alert("¡Ups! falta el nombre");
+      alert("Debes completar el nombre");
       return;
     }
 
     if (!formData.description) {
-      alert("¡Ups! falta la descripción");
+      alert("Debes completar la descripción");
       return;
     }
 
 
 
     if (!formData.released) {
-      alert("¡Ups! falta la fecha de lanzamiento");
+      alert("Debes completar la fecha de lanzamiento");
       return;
     }
 
-
-    //primero convertimos formData.rating a un número utilizando parseFloat y luego verificamos si es un número válido y si está en el rango correcto. Esto debería solucionar el problema que estás experimentando. Asegúrate de realizar esta corrección y prueba nuevamente.
     const rating = parseFloat(formData.rating);
     if (isNaN(rating) || rating < 0 || rating > 5) {
-      alert("¡Ups! el rating debe ser un número entre 0 y 5");
+      alert("El rating debe ser un número entre 0 y 5");
       return;
     } 
 
     if(formData.platforms.length===0){
-      alert("¡Ups! falta que elijas las plataformas")
+      alert("Debes seleccionar al menos una plataforma")
       return;
     }
 
     if(formData.genres.length===0){
-      alert("¡Ups! falta que elijas los géneros")
+      alert("Debe seleccionar al menos un género")
       return;
     }
 
     dispatch(createVideoGame(formData));
-
+   setShowAlert(true);
     setFormData({
       name: '',
       description: '',
@@ -153,19 +102,19 @@ useEffect(() => {
         <div className='create-container'>
       <h2 className="create-title">¡Crea un nuevo Videojuego!</h2>
       <form className="create-form" onSubmit={handleSubmit}>
-        <label htmlFor="name" className="create-label-title">Name:</label>
+        <label htmlFor="name" className="create-label-title">Nombre:</label>
         <input name="name" type="text" id="name" className="create-input" onChange={handleChange} placeholder="Name" />
 
-        <label htmlFor="description" className="create-label-title">Description:</label>
+        <label htmlFor="description" className="create-label-title">Descripcion:</label>
         <textarea name="description" id="description" className="create-input" onChange={handleChange} placeholder="Description"></textarea>
 
         <label htmlFor="rating" className="create-label-title">Rating:</label>
         <input type="text" name="rating" className="create-input" onChange={handleChange} placeholder="Rating" />
 
-        <label htmlFor="released" className="create-label-title">Released:</label>
+        <label htmlFor="released" className="create-label-title">Fecha de lanzamiento:</label>
         <input type="date" name="released" className="create-input" onChange={handleChange} placeholder="Released" />
 
-        <label className="create-label-title">Genres:</label>
+        <label className="create-label-title">Género:</label>
 <div className="create-genres-container">
   {allGenres.map((gen) => (
     <div className="create-div-genre" key={gen.name}>
@@ -178,10 +127,11 @@ useEffect(() => {
       />
       <label>{gen.name}</label>
     </div>
+
   ))}
 </div>
 
-        <label htmlFor="platforms" className="create-label-title">Platforms:</label>
+        <label htmlFor="platforms" className="create-label-title">Platformas:</label>
         <div className="create-platforms-container">
           {['PC', 'iOS', 'Android', 'macOS', 'PlayStation 4', 'PlayStation 5', 'Xbox', 'PS Vita'].map((platform) => (
             <div className="create-div-genre" key={platform}>
@@ -190,23 +140,18 @@ useEffect(() => {
             </div>
           ))}
         </div>
-
-        <label htmlFor="image" className="create-label-title">Imagen:</label>
-        <input
-          type="file"
-          accept="image/*"
-          name="image"
-          onChange={handleImageChange}
-        />
-
+        <div>
+      <input type='file'  style={{
+        margin: '20px 0px'
+      }}/>
+</div>
         <button type="submit" className="create-btn">Crear Videojuego</button>
       </form>
 
       </div>
+      
     </div>
+    
   );
 };
 
-
-
-//const filteredVideogames= useSelector((state)=>state.filteredVideogames)

@@ -1,15 +1,11 @@
-//importar las action-types
 import { GET_VIDEOGAMES,SEARCH_BY_NAME,VIEW_VIDEOGAME_DETAIL,FILTER_BY_GENRE,FILTER_BY_NAME, SORT_BY_ALPHABET,SORT_BY_RATING, CREATE_VIDEOGAME,GET_GENRES } from "../Actions/actions-types";
 
-//definir el initialState:
 let initialState={
-    videogameDetail:null, // detalles de un videojuego especifico
-    videoGames:[], // lista de todos los videojuegos
-    filteredVideogames:[], //lista de videojuegos filtrados
-    newVideogame:null, // Para almacenar el nuevo videojuego
+    videogameDetail:null, 
+    videoGames:[], 
+    filteredVideogames:[], 
+    newVideogame:null, 
 }
-
-//definir la funcion rootReducer
 
 function rootReducer(state=initialState, action){
    switch (action.type){
@@ -68,16 +64,16 @@ function rootReducer(state=initialState, action){
       
     case CREATE_VIDEOGAME:
         return{
-            ...state,newVideogame:action.payload,
+            ...state,newVideogame:{data: action.payload, message: 'El juego se creo exitosamente!'}
+            
         };       
 
     case GET_GENRES:
             return{
                 ...state, genres:action.payload
             }    
-
-        default:
-            return state;
+            default:
+                return state;
    }
 
 

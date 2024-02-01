@@ -7,7 +7,6 @@ import { Detail } from "./Views/Detail/Detail.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getVideogames } from "./Redux/Actions/actions";
-import { Navbar } from "./Components/Navbar/Navbar";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,7 +19,7 @@ function App() {
   return (
     <Router>
       <div>
-      {/* <Navbar /> */}
+  
         <Routes>
 
           <Route path="/" element={<Landing />} />

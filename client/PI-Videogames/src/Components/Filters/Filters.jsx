@@ -4,6 +4,7 @@ import { SortByAlphabet } from '../SortByAlphabet/SortByAlphabet'
 import { SortByRating } from '../SortByRating/SortByRating'
 import { useDispatch } from 'react-redux'
 import { filterByGenre, sortByAlphabet, sortByRating } from '../../Redux/Actions/actions'
+import { getVideogames } from '../../Redux/Actions/actions'
 import s from "./Filters.module.css"
 
 export const Filters = ({genres}) => {
@@ -21,15 +22,21 @@ export const Filters = ({genres}) => {
         dispatch(sortByRating(e.target.value))
     }
 
-    // const handleFilterName=(e)=>{
-    //     dispatch(filterByName(e.target.value))
-    // }
+    const handleClearFilters = () => {
+        dispatch(filterByGenre(''));
+        dispatch(sortByAlphabet(''));
+        dispatch(sortByRating(''));
+        dispatch(getVideogames());
+      };
+
   return (
     <div className={s.container}>
         <FilterByGenre genres={genres} onChange={handleFilter}  className={s.filter}/>
-        {/* <FilterByName onChange={handleFilterName}/> */}
         <SortByAlphabet onChange={handleAlphabet}  className={s.filter}/>
         <SortByRating onChange={handleRating}  className={s.filter}/>
+        <button onClick={handleClearFilters} className={s.clearButton}>
+        Clear Filters
+      </button>
     </div>
   )
 }

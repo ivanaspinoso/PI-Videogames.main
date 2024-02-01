@@ -6,6 +6,9 @@ function Pagination({ gamesPerPage, totalGames, paginate }) {
         pageNumbers.push(i)
     }
 
+    if(totalGames===0){
+        alert ("no hay mas videojuegos")
+    }
     return (
         <nav>
             <ul className='pagination'>

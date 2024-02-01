@@ -9,8 +9,6 @@ export const FilterByName = () => {
         dispatch(filterByName(input))
     }
 
-    
-
   return (
     <div>
     <label htmlFor="filterByName">Filter by Name</label>

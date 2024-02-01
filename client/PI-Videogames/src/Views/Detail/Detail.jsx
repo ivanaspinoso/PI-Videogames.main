@@ -7,21 +7,21 @@ import { Navbar } from '../../Components/Navbar/Navbar'
 
 export const Detail = () => {
  
-const dispatch=useDispatch() //Inicializa el hook dispatch para despachar acciones de Redux.
-const params= useParams() //Obtiene los parámetros de la URL, en este caso, el id
+const dispatch=useDispatch() 
+const params= useParams()
 const {id}= params
-const gameDetail = useSelector(state=>state.videogameDetail)//Selector que obtiene el estado videogameDetail de la tienda Redux
+const gameDetail = useSelector(state=>state.videogameDetail)
 
-useEffect(()=>{ //: Hook que se ejecuta después de que el componente es montado.
+useEffect(()=>{ 
   
-  dispatch(videogameDetail(id))//Cuando id cambia, se despacha la acción videogameDetail para obtener los detalles del videojuego.
+  dispatch(videogameDetail(id))
 }, [dispatch, id])
 
 
   return (
     <div className="detail-container">
        <Navbar />
-       <h1>Videojuegos</h1>
+       
        <div className="detail-info"> {gameDetail ?( <div>
      <h3>{gameDetail.name}</h3>
      <img src={gameDetail.background_image} alt={gameDetail.name} className="detail-image" />

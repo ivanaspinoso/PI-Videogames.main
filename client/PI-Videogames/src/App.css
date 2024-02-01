@@ -183,13 +183,13 @@ body {
 
 .pagination {
   display: flex;
-  padding-left: 0;
-  list-style: none;
-  border-radius: .25rem;
   justify-content: center;
-  align-items: center;
+  position: fixed;
   bottom: 20px;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  border-radius: 5px;
   
 }
 
