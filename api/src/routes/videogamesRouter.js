@@ -3,7 +3,8 @@ const db = require("../db");
 const {createVideogame,
     getVideogamebyID,
     getAllGames,
-    getVideogamesByName,} = require("../controllers/videogameController/videogameController.js")
+    getVideogamesByName,
+    } = require("../controllers/videogameController/videogameController.js")
 
 const videoGameRouter = Router()
 

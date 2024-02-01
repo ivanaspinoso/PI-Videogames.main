@@ -10,26 +10,17 @@ const getGenres = async (req,res)=>{
         const dbGenres = await Genres.findAll()
 
         if(dbGenres.length===0){
-            //obtengo los generos de la API
+            
             const apiGenresRaw = (await axios.get(`${URL}/genres?key=${API_KEY}`)).data.results;
             
             const apiGenres= apiGenresRaw.map(apiGenre=>({
-                name: apiGenre.name //Se utiliza map para transformar cada objeto de género obtenido de la API en un nuevo objeto con las propiedad name. Esto crea un array apiGenres con objetos más simples que representan los géneros.
+                name: apiGenre.name 
             }))
-
-            /*
-            este bloque de código verifica si la base de datos de géneros está vacía. 
-            Si es así, hace una solicitud a la API para obtener los géneros y los transforma en un formato más simple antes
-            de almacenarlos en la variable apiGenres.
-            Este array apiGenres contendrá la información de los géneros obtenidos de la API,
-            y se utilizará para almacenarlos en la base de datos en la siguiente parte del código.
-            */
             
             //guardo los generos en la base de datos
             if(apiGenres.length>0){
             await Genres.bulkCreate(apiGenres)
             }
-            console.log(apiGenres)
             //devuelvo los generos obtenidos en la API
             res.json(apiGenres)
         } else {
